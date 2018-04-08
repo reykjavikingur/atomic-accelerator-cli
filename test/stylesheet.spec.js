@@ -121,4 +121,16 @@ describe('Stylesheet', () => {
 			});
 		});
 	});
+
+	describe('from string with import statement containing invalid path', () => {
+		var instance;
+		beforeEach(() => {
+			instance = Stylesheet.fromString(`@import 'bar';\n@import 'in\'ject';\n@import 'comp';`);
+		});
+		describe('.toString', () => {
+			it('should remove import with invalid path', () => {
+				should(instance.toString()).eql(`@import 'bar';\n@import 'comp';`);
+			});
+		});
+	});
 });
