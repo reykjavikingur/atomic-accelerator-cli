@@ -90,6 +90,30 @@ describe('Stylesheet', () => {
 				});
 			});
 		});
+		describe('remove first', () => {
+			beforeEach(() => {
+				instance.remove('foo');
+			});
+			it('should contain only second', () => {
+				should(instance.toString()).eql(`@import 'bar';`);
+			});
+		});
+		describe('remove second', () => {
+			beforeEach(() => {
+				instance.remove('bar');
+			});
+			it('should contain only first', () => {
+				should(instance.toString()).eql(`@import 'foo';`);
+			});
+		});
+		describe('update first',()=>{
+			beforeEach(()=>{
+				instance.rename('foo', 'prima');
+			});
+			it('should have renamed first',()=>{
+				should(instance.toString()).eql(`@import 'prima';\n@import 'bar';`);
+			});
+		});
 	});
 
 	describe('from string with extraneous line', () => {
