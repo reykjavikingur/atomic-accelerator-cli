@@ -27,7 +27,12 @@ describe('Stylesheet', () => {
 				it('should include comp', () => {
 					should(instance.toString()).eql(`@import 'comp';`);
 				});
-			})
+			});
+		});
+		describe('.exists', () => {
+			it('should return false', () => {
+				should(instance.exists('anything')).not.be.ok();
+			});
 		});
 		describe('add invalid path', () => {
 			it('should throw error', () => {
@@ -47,6 +52,11 @@ describe('Stylesheet', () => {
 			it('should return same as input', () => {
 				should(instance.toString()).eql(`@import 'foo';`);
 			})
+		});
+		describe('.exists', () => {
+			it('should return true for existing import', () => {
+				should(instance.exists('foo')).be.ok();
+			});
 		});
 		describe('add other', () => {
 			beforeEach(() => {
