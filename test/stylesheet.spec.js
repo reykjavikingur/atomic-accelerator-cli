@@ -29,6 +29,14 @@ describe('Stylesheet', () => {
 				});
 			});
 		});
+		describe('add path with all allowed characters', () => {
+			beforeEach(() => {
+				instance.add('dir/comp-1/mat_hd.dflt');
+			});
+			it('should add path to string', () => {
+				should(instance.toString()).eql(`@import 'dir/comp-1/mat_hd.dflt';`);
+			});
+		});
 		describe('.exists', () => {
 			it('should return false', () => {
 				should(instance.exists('anything')).not.be.ok();
@@ -106,11 +114,11 @@ describe('Stylesheet', () => {
 				should(instance.toString()).eql(`@import 'foo';`);
 			});
 		});
-		describe('update first',()=>{
-			beforeEach(()=>{
+		describe('update first', () => {
+			beforeEach(() => {
 				instance.rename('foo', 'prima');
 			});
-			it('should have renamed first',()=>{
+			it('should have renamed first', () => {
 				should(instance.toString()).eql(`@import 'prima';\n@import 'bar';`);
 			});
 		});
